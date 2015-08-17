@@ -15,7 +15,6 @@ class Lexer
             chunk = code[i..-1]
 
             if identifier = chunk[/\A([a-z]\w*)/, 1]
-                require "debug"
                 if KEYWORDS.include?(identifier) # keywords will generate [:IF, "if"]
                     tokens << [identifier.upcase.to_sym, identifier]
                 else
@@ -60,10 +59,9 @@ class Lexer
                 end
                 i += indent.size + 1
 
-            #elsif operator = chunk[/\A(\|\||&&|==|!=|<=|>=|)/, 1]
-            #    require "debug"
-            #    tokens << [operator, operator]
-            #    i += operator.size
+            elsif operator = chunk[/\A(&&|==|\|\||==|<=|>=|!=)/, 1]
+                tokens << [operator, operator]
+                i += operator.size
 
             elsif chunk.match(/\A /)
                 i += 1
