@@ -1,7 +1,7 @@
 # Oh you know, Lexer stuff
 #
 class Lexer
-    KEYWORDS = ["def", "class", "if", "true", "false", "nil"]
+    KEYWORDS = ["def", "class", "if", "true", "false", "nil", "while"]
 
     def tokenize(code)
         code.chomp! # Remove extra line breaks
@@ -74,7 +74,7 @@ class Lexer
         end
 
         while indent = indent_stack.pop
-            tokens << [:DENDENT, indent_stack.first || 0]
+            tokens << [:DEDENT, indent_stack.first || 0]
         end
         tokens
     end

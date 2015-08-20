@@ -59,7 +59,20 @@ CODE
     ]
     assert_equal tokens, Lexer.new.tokenize(code)
   end
-  
+
+  def test_while_keyword
+    code = <<-CODE
+while counter <= 10:
+  print "Hello!"
+CODE
+    tokens = [
+        [:WHILE, "while"], [:IDENTIFIER, "counter"], ["<=", "<="],
+        [:NUMBER, 10], [:INDENT, 2], [:IDENTIFIER, "print"],
+        [:STRING, "Hello!"], [:DEDENT, 0]
+    ]
+    assert_equal tokens, Lexer.new.tokenize(code)
+  end
+
 #  ## Exercise: Modify the lexer to delimit blocks with <code>{ ... }</code> instead of indentation.
 #  def test_braket_lexer
 #    require "bracket_lexer"
