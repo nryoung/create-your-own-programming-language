@@ -1,5 +1,6 @@
 require "test_helper"
 require "lexer"
+require "bracket_lexer"
 
 class LexerTest < Test::Unit::TestCase
   def test_number
